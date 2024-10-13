@@ -1,3 +1,45 @@
+
+const setupTextarea = document.getElementById('setup-textarea'); 
+const setupInputContainer = document.getElementById('setup-input-container');
+const movieBossText = document.getElementById('movie-boss-text');
+
+document.getElementById("send-btn").addEventListener("click", () => {
+    setupInputContainer.innerHTML = `<img src="loading.svg" class="loading" id="loading">`;
+    movieBossText.innerText = `Ok, just wait a second while my digital brain digests that...`;
+    fetchBotReply();
+});
+
+async function fetchBotReply() {
+    const apiKey = 'sk-gGaLWZbsMJeeo6GTQ8s6MZAYgHcRMXiShSpAtzsHNiT3BlbkFJd8-XjJSzvFGU48Xeq9xs9fT8XdQ9oV-UbAqgYz_bkA'; // Replace with your actual OpenAI API key
+
+    try {
+        const response = await fetch(`https://api.openai.com/v1/completions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`,
+            },
+            body: JSON.stringify({
+                model: 'gpt-3.5-turbo-instruct',
+                prompt: "how do I let go of hurt in five words or less?"
+            
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        movieBossText.innerText = data.choices[0].text;
+    } catch (error) {
+        console.error('Error:', error);
+        movieBossText.innerText = 'Sorry, something went wrong.';
+    }
+}
+
+
+/*
 import { process } from '/env';
 import { Configuration, OpenAIApi } from 'openai';
 
@@ -6,7 +48,7 @@ const setupTextarea = document.getElementById('setup-textarea')
 const setupInputContainer = document.getElementById('setup-input-container')
 const movieBossText = document.getElementById('movie-boss-text')
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY
 });
 
 const openai = new OpenAIApi(configuration);
@@ -19,22 +61,15 @@ document.getElementById("send-btn").addEventListener("click", () => {
   fetchBotReply();
 })
 
- function fetchBotReply() {
-    fetch (url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json' ,
-        'Authorization' : `Bearer ${apiKey}`
-    }, 
-      body: JSON.stringify({
+ async function fetchBotReply() {
+    const response = await openai.createCompletion({
         'model' : 'gpt-3.5-turbo-instruct' ,
         'prompt' : "how do i let go of hurt in five words or less?"
-    }),
-  })   .then(response => response.json().then(data => 
-        movieBossText.innerText = data.choices[0].text
-  )) 
-} 
+    })
+        movieBossText.innerText = response.data.choices[0].text
 
+    } /*
+      
 
 /* 
 import fetch from 'node-fetch';
