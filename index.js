@@ -28,7 +28,7 @@ async function fetchBotReply(outline) {
                 model: 'gpt-3.5-turbo-instruct',
                 prompt: `Generate a short message to enthusiastically say "${outline}" sounds interesting and
                         that you need some minutes to think about it. Mention one aspect of the sentence.`,
-                        // max_tokens: 60
+                max_tokens: 60
             
             }),
         });
@@ -38,7 +38,8 @@ async function fetchBotReply(outline) {
         }
 
         const data = await response.json();
-        movieBossText.innerText = data.choices[0].text;
+        movieBossText.innerText = data.choices[0].text.trim()
+        console.log(response)
     } catch (error) {
         console.error('Error:', error);
         movieBossText.innerText = 'Sorry, something went wrong.';
