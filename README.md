@@ -17,8 +17,8 @@
 
 ---
 
-### <p align="center"> Response working.</p>
+### <p align="center"> API Completions Response working.</p>
 
 <p align="center">
-<img src="https://github.com/user-attachments/assets/98d39854-220e-485e-ba9b-8b1063471b05">
+<img src="https://github.com/user-attachments/assets/963263a0-833a-4114-819e-c8ae8b4781da">
 </p>
