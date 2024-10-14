@@ -4,13 +4,18 @@ const setupInputContainer = document.getElementById('setup-input-container');
 const movieBossText = document.getElementById('movie-boss-text');
 
 document.getElementById("send-btn").addEventListener("click", () => {
+   if(setupTextarea.value) {
+
+    const userInput = setupTextarea.value
+
     setupInputContainer.innerHTML = `<img src="loading.svg" class="loading" id="loading">`;
     movieBossText.innerText = `Ok, just wait a second while my digital brain digests that...`;
-    fetchBotReply();
+    fetchBotReply(userInput);
+   }
 });
 
-async function fetchBotReply() {
-    const apiKey = 'sk-gGaLWZbsMJeeo6GTQ8s6MZAYgHcRMXiShSpAtzsHNiT3BlbkFJd8-XjJSzvFGU48Xeq9xs9fT8XdQ9oV-UbAqgYz_bkA'; // Replace with your actual OpenAI API key
+async function fetchBotReply(outline) {
+    const apiKey = 'sk-RmVa1p34cBpS_w4VBvgoiEIR7A0HZJoBRVkZQYMrwKT3BlbkFJPnVuunHrGBgdsEl9TUMp7snm1I6JVaLwNaTXjVtg8A'; // Replace with your actual OpenAI API key
 
     try {
         const response = await fetch(`https://api.openai.com/v1/completions`, {
@@ -21,7 +26,9 @@ async function fetchBotReply() {
             },
             body: JSON.stringify({
                 model: 'gpt-3.5-turbo-instruct',
-                prompt: "how do I let go of hurt in five words or less?"
+                prompt: `Generate a short message to enthusiastically say "${outline}" sounds interesting and
+                        that you need some minutes to think about it. Mention one aspect of the sentence.`,
+                        // max_tokens: 60
             
             }),
         });
