@@ -22,3 +22,14 @@
 <p align="center">
 <img src="https://github.com/user-attachments/assets/963263a0-833a-4114-819e-c8ae8b4781da">
 </p>
+---
+
+### <p align="center"> API Pitch Completion Response working.</p>
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/10c51ebd-19e5-43d3-aa61-05318e2de449">
+<img src="https://github.com/user-attachments/assets/f7c95dc5-0718-4cd2-80c5-ca9a9490485b">
+<img src="https://github.com/user-attachments/assets/2ead4252-98be-4f9d-8ca1-f7b3d7172dfd">
+</p>
+
+
