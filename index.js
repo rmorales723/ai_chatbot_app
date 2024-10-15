@@ -1,4 +1,85 @@
+const setupTextarea = document.getElementById('setup-textarea'); 
+const setupInputContainer = document.getElementById('setup-input-container');
+const movieBossText = document.getElementById('movie-boss-text');
 
+document.getElementById("send-btn").addEventListener("click", () => {
+   if (setupTextarea.value) {
+       const userInput = setupTextarea.value;
+
+       // Display loading indicator
+       setupInputContainer.innerHTML = `<img src="loading.svg" class="loading" id="loading">`;
+       movieBossText.innerText = `Ok, just wait a second while my digital brain digests that...`;
+
+       // Fetch responses
+       fetchBotReply(userInput);
+       fetchSynopsis(userInput);
+   }
+});
+
+async function fetchBotReply(outline) {
+    const apiKey = 'sk-FNfsoWNaqlzUF7-5k1d5FEVy5QBm4uwOL2QzBHv-nCT3BlbkFJOEwyDpa7wSObmW2gcj2lYq0s3fHnSOPlMM8BIeT6EA'; // Replace with your actual OpenAI API key
+
+    try {
+        const response = await fetch('https://api.openai.com/v1/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`,
+            },
+            body: JSON.stringify({
+                model: 'gpt-3.5-turbo-instruct',
+                prompt: `Generate a short message to enthusiastically say "${outline}" sounds interesting and
+                         that you need some minutes to think about it. Mention one aspect of the sentence.`,
+                max_tokens: 60
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        movieBossText.innerText = data.choices[0].text.trim();
+    } catch (error) {
+        console.error('Error:', error);
+        movieBossText.innerText = 'Sorry, something went wrong.';
+    }
+}
+
+async function fetchSynopsis(outline) {
+    const apiKey = 'sk-FNfsoWNaqlzUF7-5k1d5FEVy5QBm4uwOL2QzBHv-nCT3BlbkFJOEwyDpa7wSObmW2gcj2lYq0s3fHnSOPlMM8BIeT6EA'; // Replace with your actual OpenAI API key
+
+    try {
+        const response = await fetch('https://api.openai.com/v1/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`,
+            },
+            body: JSON.stringify({
+                model: 'gpt-3.5-turbo-instruct',
+                prompt: `Generate engaging, professional, and marketable movie synopsis 
+                         based on the following idea: ${outline}`,
+                max_tokens: 700
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        document.getElementById('output-text').innerText = data.choices[0].text.trim();
+    } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('output-text').innerText = 'Sorry, something went wrong.';
+    }
+}
+
+
+
+
+/*
 const setupTextarea = document.getElementById('setup-textarea'); 
 const setupInputContainer = document.getElementById('setup-input-container');
 const movieBossText = document.getElementById('movie-boss-text');
@@ -11,11 +92,12 @@ document.getElementById("send-btn").addEventListener("click", () => {
     setupInputContainer.innerHTML = `<img src="loading.svg" class="loading" id="loading">`;
     movieBossText.innerText = `Ok, just wait a second while my digital brain digests that...`;
     fetchBotReply(userInput);
+    fetchSynopsis(userInput);
    }
 });
 
 async function fetchBotReply(outline) {
-    const apiKey = 'sk-RmVa1p34cBpS_w4VBvgoiEIR7A0HZJoBRVkZQYMrwKT3BlbkFJPnVuunHrGBgdsEl9TUMp7snm1I6JVaLwNaTXjVtg8A'; // Replace with your actual OpenAI API key
+    const apiKey = 'sk-FNfsoWNaqlzUF7-5k1d5FEVy5QBm4uwOL2QzBHv-nCT3BlbkFJOEwyDpa7wSObmW2gcj2lYq0s3fHnSOPlMM8BIeT6EA'; // Replace with your actual OpenAI API key
 
     try {
         const response = await fetch(`https://api.openai.com/v1/completions`, {
@@ -46,6 +128,21 @@ async function fetchBotReply(outline) {
     }
 }
 
+const configuration = {
+  apiKey: 'sk-FNfsoWNaqlzUF7-5k1d5FEVy5QBm4uwOL2QzBHv-nCT3BlbkFJOEwyDpa7wSObmW2gcj2lYq0s3fHnSOPlMM8BIeT6EA', // Replace with your actual OpenAI API key
+};
+const openai = new OpenAIApi(configuration)
+
+async function fetchSynopsis(outline){
+  const response = await openai.createCompletion({
+    model: 'gpt-3.5-turbo-instruct',
+    prompt: `Generate engaging, professional and marketable movie synopsis 
+    based on the following idea: ${outline}`,
+    max_tokens: 700
+  })
+    document.getElementById('output-text').innerText = data.choices[0].text.trim()
+}
+/*
 
 /*
 import { process } from '/env';
