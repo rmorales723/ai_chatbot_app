@@ -1,5 +1,11 @@
 # ai_chatbot_app
 ### work in progress (WIP)
+
+Overview
+### [Get Started](#get-started)
+---
+### Get Started
+Check out: [Getting Started](docs/GETTINGSTARTED.md)
 ---
 #### <p align="center"> Building an AI-powered movie app using ChatGPT, Dall-E and GPT-4 APIs.</p>
 ---
