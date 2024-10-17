@@ -1,6 +1,7 @@
 #  <p align="center">ai_chatbot_app</p>  
-   <p align="center">work in progress(WIP)</p>
 
+  <p align="center">This project is an AI-powered movie application that utilizes OpenAI's GPT-4, ChatGPT, and DALL-E APIs. The app allows users to generate movie synopses, ideas, and engaging content based on user input. By leveraging advanced natural language processing and image generation models, the app creates interactive and creative experiences for movie enthusiasts.</p>  
+  
 
 ## Overview
 ### [Getting Started](#getting-started)
@@ -11,7 +12,7 @@ Check out: [Getting Started](GETTINGSTARTED.md)
 
 ---
 #### <p align="center"> Building an AI-powered movie app using ChatGPT, Dall-E and GPT-4 APIs.</p>
----
+
 <p align="center">
 <img src="https://github.com/user-attachments/assets/34c4ad80-f2ca-4f1f-8506-f2391a9ef994">
 </p>
