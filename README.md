@@ -42,4 +42,12 @@ Check out: [Getting Started](GETTINGSTARTED.md)
 <img src="https://github.com/user-attachments/assets/2ead4252-98be-4f9d-8ca1-f7b3d7172dfd">
 </p>
 
+---
 
+### <p align="center"> FetchTitle is returning with Sypnosis.</p>
+<p align="center">
+<img src="https://github.com/user-attachments/assets/1fb2c3d2-d508-4de6-93a4-ef655889e517">
+<img src="https://github.com/user-attachments/assets/645b8391-08e2-4a4a-87e7-7a998f969e0d">
+</p>
+
+---
