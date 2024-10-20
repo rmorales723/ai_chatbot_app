@@ -44,7 +44,7 @@ Check out: [Getting Started](GETTINGSTARTED.md)
 
 ---
 
-### <p align="center"> FetchTitle is returning with Sypnosis.</p>
+### <p align="center"> Returning Title with Sypnosis.</p>
 <p align="center">
 <img src="https://github.com/user-attachments/assets/1fb2c3d2-d508-4de6-93a4-ef655889e517">
 <img src="https://github.com/user-attachments/assets/645b8391-08e2-4a4a-87e7-7a998f969e0d">
