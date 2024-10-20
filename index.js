@@ -18,7 +18,7 @@ document.getElementById("send-btn").addEventListener("click", () => {
 });
 
 async function fetchBotReply(outline) {
-    const apiKey = 'sk-4wdak2tUVHqD-lKFQP3P_RLChY64SHKIwoPRhPXSivT3BlbkFJjIWwe6_JK31oC8Ca61N-XGxvJWhva7OlDU6uZV0McA'; // Replace with your actual OpenAI API key
+    const apiKey = ''; // Replace with your actual OpenAI API key
 
     try {
         const response = await fetch('https://api.openai.com/v1/completions', {
@@ -60,7 +60,7 @@ async function fetchBotReply(outline) {
 }
 
 async function fetchSynopsis(outline) {
-    const apiKey = 'sk-4wdak2tUVHqD-lKFQP3P_RLChY64SHKIwoPRhPXSivT3BlbkFJjIWwe6_JK31oC8Ca61N-XGxvJWhva7OlDU6uZV0McA'; // Replace with your actual OpenAI API key
+    const apiKey = ''; // Replace with your actual OpenAI API key
 
     try {
         const response = await fetch('https://api.openai.com/v1/completions', {
@@ -93,7 +93,7 @@ async function fetchSynopsis(outline) {
 }
 
 async function fetchTitle(synopsis) {
-    const apiKey = 'sk-4wdak2tUVHqD-lKFQP3P_RLChY64SHKIwoPRhPXSivT3BlbkFJjIWwe6_JK31oC8Ca61N-XGxvJWhva7OlDU6uZV0McA'; // Replace with your actual OpenAI API key
+    const apiKey = ''; // Replace with your actual OpenAI API key
     
     try {
         const response = await fetch('https://api.openai.com/v1/completions', {
@@ -142,7 +142,7 @@ document.getElementById("send-btn").addEventListener("click", () => {
 });
 
 async function fetchBotReply(outline) {
-    const apiKey = 'sk-FNfsoWNaqlzUF7-5k1d5FEVy5QBm4uwOL2QzBHv-nCT3BlbkFJOEwyDpa7wSObmW2gcj2lYq0s3fHnSOPlMM8BIeT6EA'; // Replace with your actual OpenAI API key
+    const apiKey = ''; // Replace with your actual OpenAI API key
 
     try {
         const response = await fetch(`https://api.openai.com/v1/completions`, {
@@ -174,7 +174,7 @@ async function fetchBotReply(outline) {
 }
 
 const configuration = {
-  apiKey: 'sk-FNfsoWNaqlzUF7-5k1d5FEVy5QBm4uwOL2QzBHv-nCT3BlbkFJOEwyDpa7wSObmW2gcj2lYq0s3fHnSOPlMM8BIeT6EA', // Replace with your actual OpenAI API key
+  apiKey: '', // Replace with your actual OpenAI API key
 };
 const openai = new OpenAIApi(configuration)
 
