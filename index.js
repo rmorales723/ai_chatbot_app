@@ -1,9 +1,10 @@
-const setupTextarea = document.getElementById('setup-textarea'); 
+
 const setupInputContainer = document.getElementById('setup-input-container');
 const movieBossText = document.getElementById('movie-boss-text');
 
 document.getElementById("send-btn").addEventListener("click", () => {
-   if (setupTextarea.value) {
+  const setupTextarea = document.getElementById('setup-textarea'); 
+    if (setupTextarea.value) {
        const userInput = setupTextarea.value;
 
        // Display loading indicator
@@ -17,7 +18,7 @@ document.getElementById("send-btn").addEventListener("click", () => {
 });
 
 async function fetchBotReply(outline) {
-    const apiKey = 'sk-FNfsoWNaqlzUF7-5k1d5FEVy5QBm4uwOL2QzBHv-nCT3BlbkFJOEwyDpa7wSObmW2gcj2lYq0s3fHnSOPlMM8BIeT6EA'; // Replace with your actual OpenAI API key
+    const apiKey = 'sk-4wdak2tUVHqD-lKFQP3P_RLChY64SHKIwoPRhPXSivT3BlbkFJjIWwe6_JK31oC8Ca61N-XGxvJWhva7OlDU6uZV0McA'; // Replace with your actual OpenAI API key
 
     try {
         const response = await fetch('https://api.openai.com/v1/completions', {
@@ -28,8 +29,20 @@ async function fetchBotReply(outline) {
             },
             body: JSON.stringify({
                 model: 'gpt-3.5-turbo-instruct',
-                prompt: `Generate a short message to enthusiastically say "${outline}" sounds interesting and
-                         that you need some minutes to think about it. Mention one aspect of the sentence.`,
+                prompt: `Generate a short message to enthusiastically say an outline sounds interesting and that you need some minutes to think about it.
+                ###
+                outline: Two dogs fall in love and move to Hawaii to learn to surf.
+                message: I'll need to think about that. But your idea is amazing! I love the bit about Hawaii!
+                ###
+                outline:A plane crashes in the jungle and the passengers have to walk 1000km to safety.
+                message: I'll spend a few moments considering that. But I love your idea!! A disaster movie in the jungle!
+                ###
+                outline: A group of corrupt lawyers try to send an innocent woman to jail.
+                message: Wow that is awesome! Corrupt lawyers, huh? Give me a few moments to think!
+                ###
+                outline: ${outline}
+                message: 
+            `,
                 max_tokens: 60
             }),
         });
@@ -47,7 +60,7 @@ async function fetchBotReply(outline) {
 }
 
 async function fetchSynopsis(outline) {
-    const apiKey = 'sk-FNfsoWNaqlzUF7-5k1d5FEVy5QBm4uwOL2QzBHv-nCT3BlbkFJOEwyDpa7wSObmW2gcj2lYq0s3fHnSOPlMM8BIeT6EA'; // Replace with your actual OpenAI API key
+    const apiKey = 'sk-4wdak2tUVHqD-lKFQP3P_RLChY64SHKIwoPRhPXSivT3BlbkFJjIWwe6_JK31oC8Ca61N-XGxvJWhva7OlDU6uZV0McA'; // Replace with your actual OpenAI API key
 
     try {
         const response = await fetch('https://api.openai.com/v1/completions', {
@@ -58,10 +71,10 @@ async function fetchSynopsis(outline) {
             },
             body: JSON.stringify({
                 model: 'gpt-3.5-turbo-instruct',
-                prompt: `Generate engaging, professional, and marketable movie synopsis 
+                prompt: `Generate an engaging, professional, and marketable movie synopsis 
                          based on the following idea: ${outline}`,
                 max_tokens: 700
-            }),
+            })
         });
 
         if (!response.ok) {
@@ -69,14 +82,46 @@ async function fetchSynopsis(outline) {
         }
 
         const data = await response.json();
-        document.getElementById('output-text').innerText = data.choices[0].text.trim();
+        const synopsis = data.choices[0].text.trim();
+        document.getElementById('output-text').innerText = synopsis;
+        fetchTitle(synopsis);
+
     } catch (error) {
         console.error('Error:', error);
         document.getElementById('output-text').innerText = 'Sorry, something went wrong.';
     }
 }
 
+async function fetchTitle(synopsis) {
+    const apiKey = 'sk-4wdak2tUVHqD-lKFQP3P_RLChY64SHKIwoPRhPXSivT3BlbkFJjIWwe6_JK31oC8Ca61N-XGxvJWhva7OlDU6uZV0McA'; // Replace with your actual OpenAI API key
+    
+    try {
+        const response = await fetch('https://api.openai.com/v1/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`
+            },
+            body: JSON.stringify({
+                model: 'gpt-3.5-turbo-instruct',
+                prompt: `Generate a catchy movie title for this synopsis: ${synopsis}`,
+                max_tokens: 25
+            })
+        });
 
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        const title = data.choices[0].text.trim();
+        document.getElementById('output-title').innerText = title;
+
+    } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('output-title').innerText = 'Sorry, something went wrong.';
+    }
+}
 
 
 /*
