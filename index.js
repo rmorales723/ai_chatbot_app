@@ -18,7 +18,7 @@ document.getElementById("send-btn").addEventListener("click", () => {
 });
 
 async function fetchBotReply(outline) {
-    const apiKey = ''; // Replace with your actual OpenAI API key
+    const apiKey = 'sk-4wdak2tUVHqD-lKFQP3P_RLChY64SHKIwoPRhPXSivT3BlbkFJjIWwe6_JK31oC8Ca61N-XGxvJWhva7OlDU6uZV0McA'; // Replace with your actual OpenAI API key
 
     try {
         const response = await fetch('https://api.openai.com/v1/completions', {
@@ -60,7 +60,7 @@ async function fetchBotReply(outline) {
 }
 
 async function fetchSynopsis(outline) {
-    const apiKey = ''; // Replace with your actual OpenAI API key
+    const apiKey = 'sk-4wdak2tUVHqD-lKFQP3P_RLChY64SHKIwoPRhPXSivT3BlbkFJjIWwe6_JK31oC8Ca61N-XGxvJWhva7OlDU6uZV0McA'; // Replace with your actual OpenAI API key
 
     try {
         const response = await fetch('https://api.openai.com/v1/completions', {
@@ -93,7 +93,7 @@ async function fetchSynopsis(outline) {
 }
 
 async function fetchTitle(synopsis) {
-    const apiKey = ''; // Replace with your actual OpenAI API key
+    const apiKey = 'sk-4wdak2tUVHqD-lKFQP3P_RLChY64SHKIwoPRhPXSivT3BlbkFJjIWwe6_JK31oC8Ca61N-XGxvJWhva7OlDU6uZV0McA'; // Replace with your actual OpenAI API key
     
     try {
         const response = await fetch('https://api.openai.com/v1/completions', {
@@ -105,7 +105,8 @@ async function fetchTitle(synopsis) {
             body: JSON.stringify({
                 model: 'gpt-3.5-turbo-instruct',
                 prompt: `Generate a catchy movie title for this synopsis: ${synopsis}`,
-                max_tokens: 25
+                max_tokens: 25,
+                temperature: 0.7
             })
         });
 
