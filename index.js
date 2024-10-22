@@ -18,7 +18,7 @@ document.getElementById("send-btn").addEventListener("click", () => {
 });
 
 async function fetchBotReply(outline) {
-    const apiKey = 'sk-4wdak2tUVHqD-lKFQP3P_RLChY64SHKIwoPRhPXSivT3BlbkFJjIWwe6_JK31oC8Ca61N-XGxvJWhva7OlDU6uZV0McA'; // Replace with your actual OpenAI API key
+    const apiKey = `sk-iJoPOXvpHx_xOFedwypra7c228ooUHjieaiWOCZK8oT3BlbkFJJaEGpn5KWc2pB4oj6Ib5EG0kDr9KVoFe3KLK1sbxMA`; 
 
     try {
         const response = await fetch('https://api.openai.com/v1/completions', {
@@ -60,7 +60,7 @@ async function fetchBotReply(outline) {
 }
 
 async function fetchSynopsis(outline) {
-    const apiKey = 'sk-4wdak2tUVHqD-lKFQP3P_RLChY64SHKIwoPRhPXSivT3BlbkFJjIWwe6_JK31oC8Ca61N-XGxvJWhva7OlDU6uZV0McA'; // Replace with your actual OpenAI API key
+    const apiKey = 'sk-iJoPOXvpHx_xOFedwypra7c228ooUHjieaiWOCZK8oT3BlbkFJJaEGpn5KWc2pB4oj6Ib5EG0kDr9KVoFe3KLK1sbxMA'; 
 
     try {
         const response = await fetch('https://api.openai.com/v1/completions', {
@@ -112,7 +112,7 @@ async function fetchSynopsis(outline) {
 }
 
 async function fetchTitle(synopsis) {
-    const apiKey = 'sk-4wdak2tUVHqD-lKFQP3P_RLChY64SHKIwoPRhPXSivT3BlbkFJjIWwe6_JK31oC8Ca61N-XGxvJWhva7OlDU6uZV0McA'; // Replace with your actual OpenAI API key
+    const apiKey = 'sk-iJoPOXvpHx_xOFedwypra7c228ooUHjieaiWOCZK8oT3BlbkFJJaEGpn5KWc2pB4oj6Ib5EG0kDr9KVoFe3KLK1sbxMA'; 
     
     try {
         const response = await fetch('https://api.openai.com/v1/completions', {
@@ -144,7 +144,7 @@ async function fetchTitle(synopsis) {
 }
 
 async function fetchStars(synopsis) {
-    const apiKey = ''; 
+    const apiKey = 'sk-iJoPOXvpHx_xOFedwypra7c228ooUHjieaiWOCZK8oT3BlbkFJJaEGpn5KWc2pB4oj6Ib5EG0kDr9KVoFe3KLK1sbxMA'; 
 
     try {
         const response = await fetch('https://api.openai.com/v1/completions', {
@@ -186,6 +186,25 @@ async function fetchStars(synopsis) {
         document.getElementById('output-stars').innerText = 'Sorry, something went wrong.';
     }
 }
+
+async function generateImage(prompt) {
+    try {
+        const response = await openai.createImage({
+            prompt: prompt,
+            n: 1,
+            size: '256x256',
+            response_format: 'url'
+        });
+
+        const imageData = response.data.data[0].url;
+        outputImg.innerHTML = `<img src="data:image/jpeg;base64,${imageData}" alt="Generated Image" />`;
+
+    } catch (error) {
+        console.error('Error:', error);
+        outputImg.innerText = 'Sorry, something went wrong while generating the image.';
+    }
+}
+
 
 /*
 const setupTextarea = document.getElementById('setup-textarea'); 
