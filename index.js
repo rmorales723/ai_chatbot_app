@@ -1,6 +1,8 @@
 
 const setupInputContainer = document.getElementById('setup-input-container');
 const movieBossText = document.getElementById('movie-boss-text');
+const outputImg = document.getElementById('output-img');
+
 
 document.getElementById("send-btn").addEventListener("click", () => {
   const setupTextarea = document.getElementById('setup-textarea'); 
@@ -14,6 +16,7 @@ document.getElementById("send-btn").addEventListener("click", () => {
        // Fetch responses
        fetchBotReply(userInput);
        fetchSynopsis(userInput);
+       generateImage(userInput);
    }
 });
 
@@ -187,24 +190,43 @@ async function fetchStars(synopsis) {
     }
 }
 
-async function generateImage(prompt) {
+document.getElementById("submit-btn").addEventListener("click", () => {
+    const prompt = document.getElementById("instruction").value;
+    generateImage(prompt);
+  })
+  
+  async function generateImage(prompt) {
     try {
-        const response = await openai.createImage({
-            prompt: prompt,
-            n: 1,
-            size: '256x256',
-            response_format: 'url'
-        });
-
-        const imageData = response.data.data[0].url;
-        outputImg.innerHTML = `<img src="data:image/jpeg;base64,${imageData}" alt="Generated Image" />`;
-
+      console.log("Generating image with prompt:", prompt); // Log the prompt being sent
+  
+      const response = await openai.createImage({
+        prompt: prompt,
+        n: 1,
+        size: '256x256',
+        response_format: 'https://api.openai.com/v1/images/generations' // Ensure this is set to 'url'
+      });
+  
+      console.log('Image generation response:', response); // Log the entire response
+  
+      // Check if the response contains valid data
+      if (response.data && response.data.data && response.data.data.length > 0) {
+        const imageUrl = response.data.data[0].url; // Get the image URL
+        if (imageUrl) {
+          outputImg.innerHTML = `<img src="${imageUrl}" alt="Generated Image" />`; // Display the image
+          console.log("Image displayed:", imageUrl); // Log the image URL
+        } else {
+          console.error('Image URL not found in the response.');
+          outputImg.innerText = 'Sorry, no image generated.';
+        }
+      } else {
+        console.error('Response format is not as expected:', response.data);
+        outputImg.innerText = 'Sorry, no image generated.';
+      }
     } catch (error) {
-        console.error('Error:', error);
-        outputImg.innerText = 'Sorry, something went wrong while generating the image.';
+      console.error('Error generating image:', error); // Log the error
+      outputImg.innerText = 'Sorry, something went wrong while generating the image.';
     }
-}
-
+  }
 
 /*
 const setupTextarea = document.getElementById('setup-textarea'); 
