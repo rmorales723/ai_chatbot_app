@@ -21,7 +21,7 @@ document.getElementById("send-btn").addEventListener("click", () => {
 });
 
 async function fetchBotReply(outline) {
-    const apiKey = `sk-iJoPOXvpHx_xOFedwypra7c228ooUHjieaiWOCZK8oT3BlbkFJJaEGpn5KWc2pB4oj6Ib5EG0kDr9KVoFe3KLK1sbxMA`; 
+    const apiKey = `sk-sI3cBuc4FES2ko9RL8PlUgi436eWYM2F5mfrk0P2poT3BlbkFJQvtaOhfw-uZbDq3Bz5VGtIkvk73AD8czENmjSEDNQA`; 
 
     try {
         const response = await fetch('https://api.openai.com/v1/completions', {
@@ -63,7 +63,7 @@ async function fetchBotReply(outline) {
 }
 
 async function fetchSynopsis(outline) {
-    const apiKey = 'sk-iJoPOXvpHx_xOFedwypra7c228ooUHjieaiWOCZK8oT3BlbkFJJaEGpn5KWc2pB4oj6Ib5EG0kDr9KVoFe3KLK1sbxMA'; 
+    const apiKey = 'sk-sI3cBuc4FES2ko9RL8PlUgi436eWYM2F5mfrk0P2poT3BlbkFJQvtaOhfw-uZbDq3Bz5VGtIkvk73AD8czENmjSEDNQA'; 
 
     try {
         const response = await fetch('https://api.openai.com/v1/completions', {
@@ -115,7 +115,7 @@ async function fetchSynopsis(outline) {
 }
 
 async function fetchTitle(synopsis) {
-    const apiKey = 'sk-iJoPOXvpHx_xOFedwypra7c228ooUHjieaiWOCZK8oT3BlbkFJJaEGpn5KWc2pB4oj6Ib5EG0kDr9KVoFe3KLK1sbxMA'; 
+    const apiKey = 'sk-sI3cBuc4FES2ko9RL8PlUgi436eWYM2F5mfrk0P2poT3BlbkFJQvtaOhfw-uZbDq3Bz5VGtIkvk73AD8czENmjSEDNQA'; 
     
     try {
         const response = await fetch('https://api.openai.com/v1/completions', {
@@ -147,7 +147,7 @@ async function fetchTitle(synopsis) {
 }
 
 async function fetchStars(synopsis) {
-    const apiKey = 'sk-iJoPOXvpHx_xOFedwypra7c228ooUHjieaiWOCZK8oT3BlbkFJJaEGpn5KWc2pB4oj6Ib5EG0kDr9KVoFe3KLK1sbxMA'; 
+    const apiKey = 'sk-sI3cBuc4FES2ko9RL8PlUgi436eWYM2F5mfrk0P2poT3BlbkFJQvtaOhfw-uZbDq3Bz5VGtIkvk73AD8czENmjSEDNQA'; 
 
     try {
         const response = await fetch('https://api.openai.com/v1/completions', {
@@ -190,43 +190,65 @@ async function fetchStars(synopsis) {
     }
 }
 
-document.getElementById("submit-btn").addEventListener("click", () => {
-    const prompt = document.getElementById("instruction").value;
-    generateImage(prompt);
-  })
+  
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById("submit-btn").addEventListener("click", () => {
+      const prompt = document.getElementById("instruction").value;
+      generateImage(prompt);
+    });
+  });
   
   async function generateImage(prompt) {
-    try {
-      console.log("Generating image with prompt:", prompt); // Log the prompt being sent
+      const apiKey = 'sk-sI3cBuc4FES2ko9RL8PlUgi436eWYM2F5mfrk0P2poT3BlbkFJQvtaOhfw-uZbDq3Bz5VGtIkvk73AD8czENmjSEDNQA'; // Replace with your actual OpenAI API key
   
-      const response = await openai.createImage({
-        prompt: prompt,
-        n: 1,
-        size: '256x256',
-        response_format: 'https://api.openai.com/v1/images/generations' // Ensure this is set to 'url'
-      });
+      try {
+          console.log("Generating image with prompt:", prompt); // Log the prompt being sent
   
-      console.log('Image generation response:', response); // Log the entire response
+          // Make the request to the OpenAI DALL-E image generation endpoint
+          const response = await fetch('https://api.openai.com/v1/images/generations', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${apiKey}`,
+              },
+              body: JSON.stringify({
+                  prompt: prompt,
+                  n: 1,          // Number of images to generate
+                  size: '256x256' // Size of the generated image
+              }),
+          });
   
-      // Check if the response contains valid data
-      if (response.data && response.data.data && response.data.data.length > 0) {
-        const imageUrl = response.data.data[0].url; // Get the image URL
-        if (imageUrl) {
-          outputImg.innerHTML = `<img src="${imageUrl}" alt="Generated Image" />`; // Display the image
-          console.log("Image displayed:", imageUrl); // Log the image URL
-        } else {
-          console.error('Image URL not found in the response.');
-          outputImg.innerText = 'Sorry, no image generated.';
-        }
-      } else {
-        console.error('Response format is not as expected:', response.data);
-        outputImg.innerText = 'Sorry, no image generated.';
+          console.log('Image generation response:', response); // Log the entire response
+  
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+  
+          const data = await response.json();
+  
+          if (data.data && data.data.length > 0) {
+              const imageUrl = data.data[0].url; // Get the image URL
+              const outputImg = document.getElementById('output-img-container');
+              console.log(outputImg);  // Log the element to check if it exists
+              if (outputImg) {
+                  outputImg.innerHTML = `<img src="${imageUrl}" alt="Generated Image" />`; // Display the image
+                  console.log("Image displayed:", imageUrl); // Log the image URL
+              } else {
+                  console.error('Output image element not found.');
+              }
+          } else {
+              console.error('Response format is not as expected:', data);
+              document.getElementById('output-img-container').innerText = 'Sorry, no image generated.';
+          }
+      } catch (error) {
+          console.error('Error generating image:', error); // Log the error
+          const outputImg = document.getElementById('output-img-container');
+          if (outputImg) {
+              outputImg.innerText = 'Sorry, something went wrong while generating the image.';
+          }
       }
-    } catch (error) {
-      console.error('Error generating image:', error); // Log the error
-      outputImg.innerText = 'Sorry, something went wrong while generating the image.';
-    }
   }
+  
 
 /*
 const setupTextarea = document.getElementById('setup-textarea'); 
