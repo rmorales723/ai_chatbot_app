@@ -51,3 +51,8 @@ Check out: [Getting Started](GETTINGSTARTED.md)
 </p>
 
 ---
+
+### <p align="center">implemented DALLE-E and bgImage.</p>
+<p align="center">
+<img src="https://github.com/user-attachments/assets/ba2d5334-b3ea-49a8-b43e-8b9bddd707f9">
+</p>
