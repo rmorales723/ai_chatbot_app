@@ -50,9 +50,18 @@ Check out: [Getting Started](GETTINGSTARTED.md)
 <img src="https://github.com/user-attachments/assets/645b8391-08e2-4a4a-87e7-7a998f969e0d">
 </p>
 
+----
+
+### <p align="center">Implemented Dall-E for movie pitch image.</p>
+
+<p align="center">
+<img src="https://github.com/user-attachments/assets/8d4c3633-720a-45e9-bf68-3785f1cfcd5c">
+
 ---
 
-### <p align="center">implemented DALLE-E and bgImage.</p>
+### <p align="center">implemented DALLE-E for movie pitch image response.</p>
 <p align="center">
-<img src="https://github.com/user-attachments/assets/ba2d5334-b3ea-49a8-b43e-8b9bddd707f9">
+<img src="https://github.com/user-attachments/assets/96fb1470-7acb-409d-a29c-93f7d2f734dc">
+<img src="https://github.com/user-attachments/assets/6710c98a-be77-4bc8-963f-7f53f265b0b0">
+<img src="https://github.com/user-attachments/assets/6ad75156-ed59-4d90-bcaf-ae3e4d0b4158">
 </p>
