@@ -51,3 +51,10 @@ Check out: [Getting Started](GETTINGSTARTED.md)
 </p>
 
 ---
+
+### <p align="center">completed product</p>
+<p align="center">
+<img src="https://github.com/user-attachments/assets/cb6136af-83e8-4c76-b404-380d81ec8c79">
+<img src="https://github.com/user-attachments/assets/a11022c1-d2f6-4648-8bd3-7d4272c369f3">
+<img src="https://github.com/user-attachments/assets/95930b49-628c-480e-a8b4-6880276adbb4">
+</p>
