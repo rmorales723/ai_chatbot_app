@@ -18,7 +18,7 @@ body {
     font-family: 'Poppins';
     background-size: cover;
     background-repeat: repeat-y;
-    background-image: url('images/moviepitchbg-dark.jpg');
+    background-image: url('/moviepitchbg-dark.jpg');
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -42,7 +42,7 @@ h2 {
     font-weight: 400;
     letter-spacing: .04em;  
 }
-}
+
 
 p {
     line-height: 1.35em;
@@ -246,7 +246,7 @@ img.loading {
      ================= */
 
 .output-container {
-   /* display: none; */
+    display: none; 
     flex-direction: column;
     margin: 1em auto;
     color: var(--dark);
